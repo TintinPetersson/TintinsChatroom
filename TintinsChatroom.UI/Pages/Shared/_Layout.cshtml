@@ -1,77 +1,86 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TintinsChatroom.UI</title>
+    <title>Welcome | Chat away!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-
-                <a href="/Index"><img src="~/chat.png" height="75" width="75" /></a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @{
-                        if (SignInManager.IsSignedIn(User))
-                        {
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav d-flex justify-content-end">
-                            <li class="nav-item">
-                                <a class="btn btn-primary" asp-page="/Logout">Logout</a>
-                            </li>
-                        </ul>
-                        }
-                        else
-                        {
-                        <ul class="navbar-nav d-flex justify-content-end flex-grow-1">
-                            <li class="nav-item">
-                                <a asp-page="/Login" class="btn btn-primary">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-page="/Register" class="btn">Register</a>
-                            </li>
-                        </ul>
-                        }
-                    }
-                </div>
+    <div class="container">
+        @if (SignInManager.IsSignedIn(User))
+        {
+        <div id="logo">
+            <a class="btn btn-outline-light" asp-page="/Index">Home</a>
+            <a class="btn1 bg-danger" style=" border-top-right-radius: 20px; border-bottom-right-radius: 20px;"
+               asp-area="" asp-page="/Logout">LOG OUT</a>
+        </div>
+        }
+        else
+        {
+        <div id="logo">
+            <a class="btn btn-outline-light" asp-page="/Index">Home</a>
+           @* <a href="Index"><img src="~/pngfind.com-home-icon-png-transparent-6800118.png" class="mr-5 imageButton" height="32" width="32"/></a>*@
+            <a class="btn1" asp-area="" asp-page="/Login">LOG IN</a>
+            <a class="btn2" asp-area="" asp-page="/Register">REGISTER</a>
+        </div>
+        }
+        <div class="navigation-wrapper">
+            <div class="navigation-button">
+                <i class="fa fa-bars"></i>
             </div>
-        </nav>
-    </header>
+            <div class="navigation-menu nav">
+                <ul>
+                    <li><a class="menuText" asp-page="/Index">HOME</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                    <li><a class="menuText" asp-page="/Privacy">VIEW ROOMS</a></li>
+                    <li><a class="menuText" asp-page="">CREATE ROOM</a></li>
+                    <li><a class="menuText" asp-page="">JOIN ROOM</a></li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        var navButton = document.querySelector('.navigation-button');
+        var navMenu = document.querySelector('.navigation-menu');
+        var win = window;
+
+        function openMenu(event) {
+
+            navButton.classList.toggle('active');
+            navMenu.classList.toggle('active');
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+
+        function closeMenu(event) {
+            if (navButton.classList.contains('active')) {
+                navButton.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        }
+        navButton.addEventListener('click', openMenu, false);
+
+        win.addEventListener('click', closeMenu, false);
+
+    </script>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TintinsChatroom.UI - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
