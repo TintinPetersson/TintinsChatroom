@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TintinsChatroom.UI", "TintinsChatroom.UI\TintinsChatroom.UI.csproj", "{E8EA5988-A0BB-49BC-98BF-5F646F6F4A66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TintinsChatroom.UI", "TintinsChatroom.UI\TintinsChatroom.UI.csproj", "{E8EA5988-A0BB-49BC-98BF-5F646F6F4A66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TintinsChatroom.DTO", "TintinsChatroom.DTO\TintinsChatroom.DTO.csproj", "{2D0BEE13-E6AC-40AA-94A2-EA253BEF19C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TintinsChatroom.DTO", "TintinsChatroom.DTO\TintinsChatroom.DTO.csproj", "{2D0BEE13-E6AC-40AA-94A2-EA253BEF19C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,20 +15,20 @@
     <div class="container">
         @if (SignInManager.IsSignedIn(User))
         {
-        <div id="logo">
-            <a class="btn btn-outline-light" asp-page="/Index">Home</a>
-            <a class="btn1 bg-danger" style=" border-top-right-radius: 20px; border-bottom-right-radius: 20px;"
-               asp-area="" asp-page="/Logout">LOG OUT</a>
-        </div>
+            <div id="logo">
+                <a class="btn btn-outline-light" asp-page="/Index">Home</a>
+                <a class="btn1 bg-danger" style=" border-top-right-radius: 20px; border-bottom-right-radius: 20px;"
+                   asp-page="/Logout">LOG OUT</a>
+            </div>
         }
         else
         {
-        <div id="logo">
-            <a class="btn btn-outline-light" asp-page="/Index">Home</a>
-           @* <a href="Index"><img src="~/pngfind.com-home-icon-png-transparent-6800118.png" class="mr-5 imageButton" height="32" width="32"/></a>*@
-            <a class="btn1" asp-area="" asp-page="/Login">LOG IN</a>
-            <a class="btn2" asp-area="" asp-page="/Register">REGISTER</a>
-        </div>
+            <div id="logo">
+                <a class="btn btn-outline-light" asp-page="/Index">Home</a>
+                @* <a href="Index"><img src="~/pngfind.com-home-icon-png-transparent-6800118.png" class="mr-5 imageButton" height="32" width="32"/></a>*@
+                <a class="btn1" asp-page="/Login">LOG IN</a>
+                <a class="btn2" asp-page="/Register">REGISTER</a>
+            </div>
         }
         <div class="navigation-wrapper">
             <div class="navigation-button">
@@ -40,9 +39,9 @@
                     <li><a class="menuText" asp-page="/Index">HOME</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                    <li><a class="menuText" asp-page="/Privacy">VIEW ROOMS</a></li>
-                    <li><a class="menuText" asp-page="">CREATE ROOM</a></li>
-                    <li><a class="menuText" asp-page="">JOIN ROOM</a></li>
+                        <li><a class="menuText" asp-page="/User/ViewRooms">VIEW ROOMS</a></li>
+                        <li><a class="menuText" asp-page="/User/CreateRoom">CREATE ROOM</a></li>
+                        <li><a class="menuText" asp-page="/User/JoinChat">JOIN ROOM</a></li>
                     }
                 </ul>
 
