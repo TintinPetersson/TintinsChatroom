@@ -2,6 +2,7 @@
 @model TintinsChatroom.UI.Pages.LoginModel
 @{
 }
+
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-4">
@@ -18,12 +19,12 @@
                     <input type="password" asp-for="Model.Password" class="form-control bg-transparent text-light" />
                     <span asp-validation-for="Model.Password" class="text-danger"></span>
                 </div>
-                @*<div class="mb-3 form-check text-light">
+                <div class="mb-3 form-check text-light">
                     <input type="checkbox" asp-for="Model.RememberMe" class="form-check-input" />
-                    <label class="form-check-label" asp-for="Model.RememberMe">Remember Me?</label>
-                </div>*@
-                <div class="mb-3" >
-                    <button type="submit" class="btn btn-outline-light">Login</button>
+                    <label class="form-check-label pl-4 font-italic" asp-for="Model.RememberMe">Remember me</label>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-outline-light">Log in</button>
                 </div>
             </form>
         </div>
