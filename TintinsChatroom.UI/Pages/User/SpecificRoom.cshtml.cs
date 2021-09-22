@@ -12,6 +12,14 @@ namespace TintinsChatroom.UI.Pages.User
 {
     public class SpecificRoomModel : PageModel
     {
+        private readonly SignInManager<ChatUserModel> signInManager;
+        public SpecificRoomModel(SignInManager<ChatUserModel> signInManager)
+        {
+            this.signInManager = signInManager;
+        }
+
+
+
         public List<ChatUserModel> ChatUsers { get; set; } = new List<ChatUserModel>();
         public ChatUserModel ChatUser { get; set; } = new ChatUserModel();
         public AuthDbContext Context { get; set; } = new AuthDbContext();
@@ -20,13 +28,6 @@ namespace TintinsChatroom.UI.Pages.User
         [BindProperty]
         public ChatMessageModel MessageModel { get; set; } = new ChatMessageModel();
 
-
-
-        private readonly SignInManager<ChatUserModel> signInManager;
-        public SpecificRoomModel(SignInManager<ChatUserModel> signInManager)
-        {
-            this.signInManager = signInManager;
-        }
 
         public void OnGet(int id)
         {
@@ -43,6 +44,7 @@ namespace TintinsChatroom.UI.Pages.User
             RoomModel.Messages.Add(MessageModel);
 
             Context.ChatRoomModels.Update(RoomModel);
+
             Context.SaveChanges();
         }
     }
