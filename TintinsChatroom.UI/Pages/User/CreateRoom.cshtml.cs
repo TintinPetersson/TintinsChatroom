@@ -16,6 +16,7 @@ namespace TintinsChatroom.UI.Pages.User
         public ChatUserModel ChatUser { get; set; }
         [BindProperty]
         public ChatRoomModel RoomModel { get; set; } = new ChatRoomModel();
+        public AuthDbContext Context { get; set; } = new AuthDbContext();
         public CreateRoomModel(SignInManager<ChatUserModel> signInManager)
         {
             this.signInManager = signInManager;
@@ -25,16 +26,13 @@ namespace TintinsChatroom.UI.Pages.User
         }
         public async Task<IActionResult> OnPost()
         {
-            using (AuthDbContext context = new AuthDbContext())
-            {
                 ChatUser = await signInManager.UserManager.GetUserAsync(HttpContext.User);
 
                 RoomModel.ChatRoomOwner = ChatUser.ChatUserId;
 
-                context.ChatRoomModels.Add(RoomModel);
+                Context.ChatRoomModels.Add(RoomModel);
 
-                context.SaveChanges();
-            }
+                Context.SaveChanges();
 
             return RedirectToPage("/User/ViewRooms");
         }

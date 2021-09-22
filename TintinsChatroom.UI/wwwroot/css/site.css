@@ -270,10 +270,41 @@ span {
     font-size: 42px;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+.card {
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.c-details span {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px;
+}
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+    .progress div {
+        background-color: red
+    }
+
+.text1 {
+    color: #fed85d;
+    font-size: 14px;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
 }

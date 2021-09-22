@@ -10,8 +10,8 @@ using TintinsChatroom.DTO.Database;
 namespace TintinsChatroom.DTO.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20210922101305_virtual")]
-    partial class @virtual
+    [Migration("20210922170802_initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
