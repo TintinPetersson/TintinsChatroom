@@ -7,6 +7,10 @@
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-4">
             <h1 class="mb-3 text-light">@Model.RoomModel.ChatRoomName</h1>
+            @foreach (var message in Model.RoomModel.Messages)
+            {
+                <h4>@message</h4>
+            }
 
             <form method="post">
                 <div asp-validation-summary="All" class="text-danger">
