@@ -21,7 +21,7 @@
         if (SignInManager.IsSignedIn(User))
         {
             <section class="hero">
-                <h1>Hello there! <br> <span> @User.Identity.Name</span></h1>
+                <h1>Hello there! <br> <span> @User.Identity.Name.ToString()</span></h1>
             </section>
         }
         else
