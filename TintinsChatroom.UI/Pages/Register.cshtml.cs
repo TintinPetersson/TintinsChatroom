@@ -11,13 +11,13 @@ namespace TintinsChatroom.UI.Pages
 {
     public class RegisterModel : PageModel
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<ChatUserModel> userManager;
+        private readonly SignInManager<ChatUserModel> signInManager;
 
         [BindProperty]
         public Register Model { get; set; }
 
-        public RegisterModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public RegisterModel(UserManager<ChatUserModel> userManager, SignInManager<ChatUserModel> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -29,13 +29,18 @@ namespace TintinsChatroom.UI.Pages
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser()
+                int id = Guid.NewGuid().GetHashCode();
+
+                var user = new ChatUserModel()
                 {
-                    UserName = Model.Email,
+                    ChatUserId = id,
+                    ChatUsername = Model.Username,
+                    UserName = Model.Username,
                     Email = Model.Email
                 };
 
                 var result = await userManager.CreateAsync(user, Model.Password);
+
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, false);

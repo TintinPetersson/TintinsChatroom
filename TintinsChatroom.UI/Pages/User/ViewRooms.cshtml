@@ -2,4 +2,7 @@
 @model TintinsChatroom.UI.Pages.User.ViewRoomsModel
 @{
 }
-<h1>View rooms</h1>
+@foreach (var room in Model.RoomModels)
+{
+    <h1>@room.ChatRoomName</h1>
+}

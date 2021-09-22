@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TintinsChatroom.DTO.Database;
+using TintinsChatroom.DTO.Models;
 
 namespace TintinsChatroom.UI
 {
@@ -31,7 +32,7 @@ namespace TintinsChatroom.UI
             services.AddDbContext<AuthDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AuthDbConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ChatUserModel, IdentityRole>()
                .AddEntityFrameworkStores<AuthDbContext>();
 
             services.ConfigureApplicationCookie(config =>

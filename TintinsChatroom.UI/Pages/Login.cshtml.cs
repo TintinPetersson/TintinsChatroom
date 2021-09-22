@@ -11,12 +11,12 @@ namespace TintinsChatroom.UI.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly SignInManager<ChatUserModel> signInManager;
 
         [BindProperty]
         public Login Model { get; set; }
 
-        public LoginModel(SignInManager<IdentityUser> signInManager)
+        public LoginModel(SignInManager<ChatUserModel> signInManager)
         {
             this.signInManager = signInManager;
         }

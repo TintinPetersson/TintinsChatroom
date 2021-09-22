@@ -1,11 +1,7 @@
 ﻿@page
-@model IndexModel
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+@model TintinsChatroom.UI.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
 }
-
 <head>
     <meta charset="UTF-8">
     <title>slanted menu</title>
@@ -18,10 +14,10 @@
 
 <body>
     @{
-        if (SignInManager.IsSignedIn(User))
+        if (Model.IsSignedIn)
         {
             <section class="hero">
-                <h1>Hello there! <br> <span> @User.Identity.Name.ToString()</span></h1>
+                    <h1>Hello there! <br> <span> @Model.ChatUser.UserName.ToString()</span></h1>
             </section>
         }
         else
@@ -31,5 +27,4 @@
             </section>
         }
     }
-
 </body>
