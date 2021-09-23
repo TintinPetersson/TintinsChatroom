@@ -4,7 +4,7 @@
 <div class="container mt-5 mb-3">
     <div id="content">
         <div id="bottom2">
-            <div class="row">
+            <div class="row border-left">
                 @foreach (var room in Model.RoomModels)
                 {
                     <div class="col-md-4 mb-4">
@@ -26,39 +26,31 @@
                             <div class="mt-5">
                                 <h2 class="heading">@room.ChatRoomName</h2>
                                 <div class="mt-5">
-
                                     @if (room.ChatMessages.Count() <= 2)
                                     {
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
-                                                 style="        width: @(room.ChatMessages.Count() * 10 + "%");
-        background-color: red !important;
-        color: black
-" aria-valuemin="0"
-                                                 aria-valuemax="10">Unloved</div>
+                                                 style=" width: @(room.ChatMessages.Count() * 10 + "%"); background-color: red !important;" aria-valuemin="0" aria-valuemax="10">Unloved</div>
                                         </div> }
                                     else if (room.ChatMessages.Count() <= 4)
                                     {
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
-                                                 style="width: @(room.ChatMessages.Count() * 10 + "%"); background-color: orange!important; color: black" aria-valuemin="0"
+                                                 style="width: @(room.ChatMessages.Count() * 10 + "%"); background-color: orange!important;" aria-valuemin="0"
                                                  aria-valuemax="10">Trending</div>
                                         </div> }
                                     else if (room.ChatMessages.Count() <= 7)
                                     {
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
-                                                 style="width: @(room.ChatMessages.Count() * 10 + "%"); background-color: gold!important; color: black" aria-valuemin="0"
+                                                 style="width: @(room.ChatMessages.Count() * 10 + "%"); background-color: gold!important;" aria-valuemin="0"
                                                  aria-valuemax="10">Popular</div>
                                         </div> }
                                     else
                                     {
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
-                                                 style="        width: @(room.ChatMessages.Count() * 10 + "%");
-                                                    background-color: limegreen !important;
-                                                    color: black
-                                            " aria-valuemin="0"
+                                                 style="width: @(room.ChatMessages.Count() * 10 + "%"); background-color: limegreen !important;" aria-valuemin="0"
                                                  aria-valuemax="10">Hot</div>
                                         </div>}
 

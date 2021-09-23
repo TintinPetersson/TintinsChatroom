@@ -301,8 +301,14 @@ span {
 }
 .progress {
     height: 20px;
-    border-radius: 10px
+    border-radius: 10px;
+    color: black;
+    font-size: 14px;
 }
+    .progress div {
+        color: black;
+        font-size: 14px;
+    }
 
 .text1 {
     color: #fed85d;
