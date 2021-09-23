@@ -18,15 +18,34 @@
     @{
         if (SignInManager.IsSignedIn(User))
         {
-        <section class="hero">
-            <h1>Hello there! <br> <span> @User.Identity.Name</span></h1>
-        </section>
+            <div class="container">
+                <div class="row justify-content-center align-content-center">
+                    <div class="col-6">
+                        <section class="hero">
+                            <h1>Hello there! <br> <span> @User.Identity.Name</span></h1>
+                        </section>
+                    </div>
+                    <div class="col-6">
+                        <img src="https://cdn2.iconfinder.com/data/icons/entrepreneur-line-color-overweight-invest/512/Motivation-512.png" />
+                    </div>
+                </div>
+            </div>
         }
         else
         {
-            <section class="hero">
-                <h1>Welcome to <br> <span>TINTINS CHATROOMS</span></h1>
-            </section>
+            <div class="container">
+                <div class="row justify-content-center align-content-center">
+                    <div class="col-6">
+                        <section class="hero">
+                            <h1>Welcome to <br>  <span>TINTINS CHATROOMS</span></h1>
+                        </section>
+                    </div>
+                    <div class="col-6">
+                        <img src="https://cdn2.iconfinder.com/data/icons/entrepreneur-line-color-overweight-invest/512/Motivation-512.png" />
+
+                    </div>
+                </div>
+            </div>
         }
     }
 </body>
