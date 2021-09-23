@@ -19,6 +19,10 @@
                 <a class="btn btn-outline-light" asp-page="/Index">Home</a>
                 <a class="btn1 bg-danger" style=" border-top-right-radius: 20px; border-bottom-right-radius: 20px;"
                    asp-page="/Logout">LOG OUT</a>
+                <a asp-page="/User/EditUser"><img src="~/images/@Model.ChatUser.Image" class="img-thumbnail ml-3"
+                    style="width: 50px; height: 50px; border-top-right-radius: 25px;
+                    border-bottom-right-radius: 25px; border-top-left-radius: 25px; border-bottom-left-radius: 25px;" /></a>
+                <a>@Model.ChatUser.UserName</a>
             </div>
         }
         else
@@ -40,7 +44,6 @@
                     {
                         <li><a class="menuText" asp-page="/User/ViewRooms">VIEW ROOMS</a></li>
                         <li><a class="menuText" asp-page="/User/CreateRoom">CREATE ROOM</a></li>
-                        <li><a class="menuText" asp-page="/User/JoinChat">JOIN ROOM</a></li>
                     }
                 </ul>
 

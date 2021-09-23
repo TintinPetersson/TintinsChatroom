@@ -7,32 +7,36 @@
         <div class="col-sm-12 col-md-12 col-lg-4">
             <h1 class="mb-3 text-light">Register</h1>
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="All" class="text-danger">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label text-light" asp-for="Model.Username">Username</label>
-                    <input type="text" asp-for="Model.Username" class="form-control bg-transparent text-light" />
-                    <span asp-validation-for="Model.Username" class="text-danger"></span>
+                    <input hidden asp-for="@Model.Model.PhotoPath" />
+                    <input type="file" asp-for="@Model.Photo" accept=".jpg, .jpeg" />
                 </div>
-                <div class="mb-3">
-                    <label class="form-label text-light" asp-for="Model.Email">Email Address</label>
-                    <input type="text" asp-for="Model.Email" class="form-control bg-transparent text-light" />
-                    <span asp-validation-for="Model.Email" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label text-light" asp-for="Model.Password">Password</label>
-                    <input type="password" asp-for="Model.Password" class="form-control bg-transparent text-light" />
-                    <span asp-validation-for="Model.Password" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label text-light" asp-for="Model.ConfirmPassword">Confirm Password</label>
-                    <input type="password" asp-for="Model.ConfirmPassword" class="form-control bg-transparent text-light" />
-                    <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-outline-light">Register</button>
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label text-light" asp-for="Model.Username">Username</label>
+                        <input type="text" asp-for="Model.Username" class="form-control bg-transparent text-light" />
+                        <span asp-validation-for="Model.Username" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-light" asp-for="Model.Email">Email Address</label>
+                        <input type="text" asp-for="Model.Email" class="form-control bg-transparent text-light" />
+                        <span asp-validation-for="Model.Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-light" asp-for="Model.Password">Password</label>
+                        <input type="password" asp-for="Model.Password" class="form-control bg-transparent text-light" />
+                        <span asp-validation-for="Model.Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-light" asp-for="Model.ConfirmPassword">Confirm Password</label>
+                        <input type="password" asp-for="Model.ConfirmPassword" class="form-control bg-transparent text-light" />
+                        <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-outline-light">Register</button>
+                    </div>
             </form>
         </div>
     </div>

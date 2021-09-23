@@ -14,6 +14,8 @@ namespace TintinsChatroom.UI.Pages.User
     {
         private readonly SignInManager<ChatUserModel> _signInManager;
         private readonly AuthDbContext _context;
+        public ChatUserModel ChatUser { get; set; }
+        public bool IsSignedIn { get; set; }
 
         [BindProperty]
         public ChatRoomModel ChatRoom { get; set; } = new ChatRoomModel();
@@ -22,8 +24,13 @@ namespace TintinsChatroom.UI.Pages.User
             _signInManager = signInManager;
             _context = context;
         }
-        public void OnGet()
+        public async Task OnGet()
         {
+            IsSignedIn = _signInManager.IsSignedIn(HttpContext.User);
+            if (IsSignedIn)
+            {
+                ChatUser = await _signInManager.UserManager.GetUserAsync(HttpContext.User);
+            }
         }
         public async Task<IActionResult> OnPost()
         {

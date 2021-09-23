@@ -1,43 +1,83 @@
 ﻿@page
 @model TintinsChatroom.UI.Pages.User.ViewRoomsModel
-@{
-}
+@{ }
 <div class="container mt-5 mb-3">
-    <div class="row">
-        @foreach (var room in Model.RoomModels)
-        {
-            <div class="col-md-4">
-                <div class="card p-3 mb-2">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex flex-row align-items-center">
-                            <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
-                            <div class="ms-2 c-details">
-                                <h6 class="mb-0 ml-3" style="font-size:20px; font-weight:400; color:darkcyan;">@room.Owner</h6> 
-                                <span class="text1 ml-3 text-light">3 Days Ago !!FIX!!</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <h2 class="heading">@room.ChatRoomName</h2>
-                        <div class="mt-5">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="@room.ChatMessages.Count" aria-valuemin="0" 
-                                     aria-valuemax="100"></div>
-                            </div>
-                            <div class="mt-3 mb-2">
-                                <span class="text1">Messages: @room.ChatMessages.Count</span>
-                            </div>
-                            <form method="post">
-                                <div class="card-footer text-center pb-0 mb-0">
-                                    <a class="btn btn-outline-light" asp-page="/User/SpecificRoom" asp-route-id="@room.Id" 
-                                       type="submit">Join Chat</a>
+    <div id="content">
+        <div id="bottom2">
+            <div class="row">
+                @foreach (var room in Model.RoomModels)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card p-3 mb-2">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <img class="icon" src="~/images/@room.Owner.Image">
+                                    <div class="ms-2 c-details">
+                                        <h6 class="mb-0 ml-3" style="font-size:20px; font-weight:400; color:darkcyan;">@room.Owner</h6>
+                                        @if (room.ChatMessages.Count != 0)
+                                        {
+                                            <span class="text1 ml-3 text-light">Active: @room.ChatMessages.Last().Date.DayOfWeek</span> }
+                                        else
+                                        {
+                                            <span class="text1 ml-3 text-light">Last message: None</span>}
+                                    </div>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="mt-5">
+                                <h2 class="heading">@room.ChatRoomName</h2>
+                                <div class="mt-5">
+
+                                    @if (room.ChatMessages.Count() <= 2)
+                                    {
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
+                                                 style="        width: @(room.ChatMessages.Count() * 10 + "%");
+        background-color: red !important;
+        color: black
+" aria-valuemin="0"
+                                                 aria-valuemax="10">Unloved</div>
+                                        </div> }
+                                    else if (room.ChatMessages.Count() <= 4)
+                                    {
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
+                                                 style="width: @(room.ChatMessages.Count() * 10 + "%"); background-color: orange!important; color: black" aria-valuemin="0"
+                                                 aria-valuemax="10">Trending</div>
+                                        </div> }
+                                    else if (room.ChatMessages.Count() <= 7)
+                                    {
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
+                                                 style="width: @(room.ChatMessages.Count() * 10 + "%"); background-color: gold!important; color: black" aria-valuemin="0"
+                                                 aria-valuemax="10">Popular</div>
+                                        </div> }
+                                    else
+                                    {
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="@room.ChatMessages.Count()"
+                                                 style="        width: @(room.ChatMessages.Count() * 10 + "%");
+                                                    background-color: limegreen !important;
+                                                    color: black
+                                            " aria-valuemin="0"
+                                                 aria-valuemax="10">Hot</div>
+                                        </div>}
+
+
+
+                                    <div class="mt-3 mb-2">
+                                        <span class="text1">Messages: @room.ChatMessages.Count</span>
+                                    </div>
+                                    <form method="post">
+                                        <div class="card-footer text-center pb-0 mb-0">
+                                            <a class="btn btn-outline-light" asp-page="/User/SpecificRoom" asp-route-id="@room.Id"
+                                               type="submit">Join Chat</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </div>}
             </div>
-        }
+        </div>
     </div>
 </div>
-

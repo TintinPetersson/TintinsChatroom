@@ -25,10 +25,18 @@ namespace TintinsChatroom.UI.Pages.User
         public ChatRoomModel ChatRoom { get; set; } = new ChatRoomModel();
         [BindProperty]
         public string NewMessage { get; set; }
+        public ChatUserModel ChatUser { get; set; }
+        public bool IsSignedIn { get; set; }
 
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
             ChatRoom = context.ChatRoomModels.Include(c => c.ChatMessages).ThenInclude(m => m.User).FirstOrDefault(c => c.Id == id);
+            
+                IsSignedIn = signInManager.IsSignedIn(HttpContext.User);
+                if (IsSignedIn)
+                {
+                    ChatUser = await signInManager.UserManager.GetUserAsync(HttpContext.User);
+            }
         }
         public async Task<IActionResult> OnPost()
         {
@@ -41,6 +49,9 @@ namespace TintinsChatroom.UI.Pages.User
                     Date = DateTime.Now,
                     User = await signInManager.UserManager.GetUserAsync(HttpContext.User)
                 };
+
+                
+
                 await context.ChatMessageModels.AddAsync(chatMessage);
                 await context.SaveChangesAsync();
             }

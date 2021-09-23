@@ -1,0 +1,44 @@
+﻿@page
+@model TintinsChatroom.UI.Pages.User.EditUserModel
+@{
+}
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <h1 class="mb-3 text-light">Edit Profile</h1>
+            <img src="~/images/@Model.ChatUser.Image" class="img-thumbnail" asp-append-version="true" style="width:300px;" />
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger">
+                </div>
+                <div>
+                    <input class="bg-transparent ml-2" type="file" asp-for="@Model.Photo accept=" .jpg, .jpeg" />
+                    <br />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-light" asp-for="Model.Username">Change Username</label>
+                    <input type="text" asp-for="Model.Username" class="form-control bg-transparent text-light" />
+                    <span asp-validation-for="Model.Username" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-light" asp-for="@Model.OldPassword">Old Password</label>
+                    <input type="password" asp-for="@Model.OldPassword" class="form-control bg-transparent text-light" />
+                    <span asp-validation-for="@Model.OldPassword" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-light" asp-for="@Model.NewPassword">New Password</label>
+                    <input type="password" asp-for="@Model.NewPassword" class="form-control bg-transparent text-light" />
+                    <span asp-validation-for="@Model.NewPassword" class="text-danger"></span>
+                </div>
+
+
+                <div class="mb-3">
+                    <br />
+                    <button type="submit" class="btn btn-outline-light">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

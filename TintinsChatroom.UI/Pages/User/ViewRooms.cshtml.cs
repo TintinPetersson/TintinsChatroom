@@ -12,11 +12,23 @@ namespace TintinsChatroom.UI.Pages.User
 {
     public class ViewRoomsModel : PageModel
     {
-        public List<ChatUserModel> ChatUser { get; set; } = new List<ChatUserModel>();
+        private readonly SignInManager<ChatUserModel> signInManager;
+        public ViewRoomsModel(SignInManager<ChatUserModel> signInManager)
+        {
+            this.signInManager = signInManager;
+        }
+        public bool IsSignedIn { get; set; }
+        public ChatUserModel ChatUser { get; set; } = new ChatUserModel();
         public AuthDbContext Context { get; set; } = new AuthDbContext();
         public List<ChatRoomModel> RoomModels { get; set; } = new List<ChatRoomModel>();
-        public void OnGet()
+        public async Task OnGet()
         {
+            IsSignedIn = signInManager.IsSignedIn(HttpContext.User);
+            if (IsSignedIn)
+            {
+                ChatUser = await signInManager.UserManager.GetUserAsync(HttpContext.User);
+            }
+
             RoomModels = Context.ChatRoomModels.ToList();
         }
     }

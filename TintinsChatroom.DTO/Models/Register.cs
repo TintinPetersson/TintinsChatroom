@@ -12,7 +12,6 @@ namespace TintinsChatroom.DTO.Models
         [Required]
         public string Username { get; set; }
         public string PhotoPath { get; set; }
-
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
