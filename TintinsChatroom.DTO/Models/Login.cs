@@ -10,8 +10,7 @@ namespace TintinsChatroom.DTO.Models
     public class Login
     {
         [Required]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }

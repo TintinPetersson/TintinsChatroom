@@ -9,11 +9,10 @@ namespace TintinsChatroom.DTO.Models
 {
     public class ChatRoomModel
     {
-        [Key]
-        public virtual int ChatRoomId { get; set; }
-        public virtual int ChatRoomOwner { get; set; } // A ChatUserModel id
-        public virtual string ChatRoomName { get; set; }
-        public virtual List<ChatMessageModel> Messages { get; set; }
+        public int Id { get; set; }
+        public string ChatRoomName { get; set; }
+        public virtual ChatUserModel Owner { get; set; }
+        public virtual List<ChatMessageModel> ChatMessages { get; set; }
 
     }
 }

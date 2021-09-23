@@ -10,8 +10,9 @@ namespace TintinsChatroom.DTO.Models
     public class Register
     {
         [Required]
-        [DataType(DataType.Text)]
         public string Username { get; set; }
+        public string PhotoPath { get; set; }
+
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

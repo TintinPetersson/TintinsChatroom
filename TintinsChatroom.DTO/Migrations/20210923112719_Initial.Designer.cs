@@ -10,7 +10,7 @@ using TintinsChatroom.DTO.Database;
 namespace TintinsChatroom.DTO.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20210922170802_initial")]
+    [Migration("20210923112719_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,19 +225,13 @@ namespace TintinsChatroom.DTO.Migrations
 
             modelBuilder.Entity("TintinsChatroom.DTO.Models.ChatMessageModel", b =>
                 {
-                    b.Property<int>("ChatMessageId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ChatRoomId")
                         .HasColumnType("int");
-
-                    b.Property<int>("ChatUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ChatUserId1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -245,18 +239,21 @@ namespace TintinsChatroom.DTO.Migrations
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ChatMessageId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("ChatRoomId");
 
-                    b.HasIndex("ChatUserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ChatMessageModels");
                 });
 
             modelBuilder.Entity("TintinsChatroom.DTO.Models.ChatRoomModel", b =>
                 {
-                    b.Property<int>("ChatRoomId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -264,10 +261,12 @@ namespace TintinsChatroom.DTO.Migrations
                     b.Property<string>("ChatRoomName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ChatRoomOwner")
-                        .HasColumnType("int");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ChatRoomId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("ChatRoomModels");
                 });
@@ -276,10 +275,7 @@ namespace TintinsChatroom.DTO.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("ChatUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ChatUsername")
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ChatUserModel");
@@ -339,23 +335,39 @@ namespace TintinsChatroom.DTO.Migrations
             modelBuilder.Entity("TintinsChatroom.DTO.Models.ChatMessageModel", b =>
                 {
                     b.HasOne("TintinsChatroom.DTO.Models.ChatRoomModel", "ChatRoom")
-                        .WithMany("Messages")
+                        .WithMany("ChatMessages")
                         .HasForeignKey("ChatRoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TintinsChatroom.DTO.Models.ChatUserModel", "ChatUser")
-                        .WithMany()
-                        .HasForeignKey("ChatUserId1");
+                    b.HasOne("TintinsChatroom.DTO.Models.ChatUserModel", "User")
+                        .WithMany("ChatMessages")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("ChatRoom");
 
-                    b.Navigation("ChatUser");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TintinsChatroom.DTO.Models.ChatRoomModel", b =>
                 {
-                    b.Navigation("Messages");
+                    b.HasOne("TintinsChatroom.DTO.Models.ChatUserModel", "Owner")
+                        .WithMany("ChatRooms")
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("TintinsChatroom.DTO.Models.ChatRoomModel", b =>
+                {
+                    b.Navigation("ChatMessages");
+                });
+
+            modelBuilder.Entity("TintinsChatroom.DTO.Models.ChatUserModel", b =>
+                {
+                    b.Navigation("ChatMessages");
+
+                    b.Navigation("ChatRooms");
                 });
 #pragma warning restore 612, 618
         }

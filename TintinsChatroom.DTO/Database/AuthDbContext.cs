@@ -29,6 +29,5 @@ namespace TintinsChatroom.DTO.Database
         }
         public virtual DbSet<ChatMessageModel> ChatMessageModels { get; set; }
         public virtual DbSet<ChatRoomModel> ChatRoomModels { get; set; }
-        public virtual DbSet<ChatUserModel> ChatUserModels { get; set; }
     }
 }

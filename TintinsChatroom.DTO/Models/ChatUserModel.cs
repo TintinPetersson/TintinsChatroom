@@ -10,7 +10,8 @@ namespace TintinsChatroom.DTO.Models
 {
     public class ChatUserModel : IdentityUser
     {
-        public virtual int ChatUserId { get; set; }
-        public virtual string ChatUsername { get; set; }
+        public string Image { get; set; }
+        public virtual List<ChatMessageModel> ChatMessages { get; set; }
+        public virtual List<ChatRoomModel> ChatRooms { get; set; }
     }
 }

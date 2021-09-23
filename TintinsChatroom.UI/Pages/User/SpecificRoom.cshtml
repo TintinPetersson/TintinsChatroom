@@ -6,20 +6,31 @@
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-4">
-            <h1 class="mb-3 text-light">@Model.RoomModel.ChatRoomName</h1>
-            @foreach (var message in Model.RoomModel.Messages)
+            <h1 class="mb-3 text-light">@Model.ChatRoom.ChatRoomName</h1>
+            @if (Model.ChatRoom.ChatMessages.Count != 0)
             {
-                <h4>@message</h4>
+                @foreach (var message in Model.ChatRoom.ChatMessages)
+                {
+                    <h3 class="text-light">@message.Message</h3>
+                    <p class="text-light">sent by @message.User.UserName || @message.Date</p>
+                }
+            }
+            else
+            {
+                <h2>No fsdfdsfdsfd</h2>
             }
 
             <form method="post">
                 <div asp-validation-summary="All" class="text-danger">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label text-light" asp-for="@Model.MessageModel.Message">Message</label>
-                    <textarea asp-for="@Model.MessageModel.Message" class="form-control bg-transparent text-light" style="height:100px; width:250px;"></textarea>
-                    <span asp-validation-for="@Model.MessageModel.Message" class="text-danger"></span>
-                    <a hidden asp-route-id="@Model.RoomModel.ChatRoomId"></a>
+                    <input type="hidden" asp-for="@Model.ChatRoom.Id" />
+                    <input type="hidden" asp-for="@Model.ChatRoom.ChatRoomName" />
+                    <input type="hidden" asp-for="@Model.ChatRoom.Owner" />
+                    <input type="hidden" asp-for="@Model.ChatRoom.ChatMessages" />
+                    <label class="form-label text-light" asp-for="@Model.NewMessage">Message</label>
+                    <textarea asp-for="@Model.NewMessage" class="form-control bg-transparent text-light" style="height:100px; width:250px;"></textarea>
+                    <span asp-validation-for="@Model.NewMessage" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-outline-light">Comment</button>

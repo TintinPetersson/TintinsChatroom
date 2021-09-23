@@ -27,8 +27,7 @@ namespace TintinsChatroom.DTO.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChatUserId = table.Column<int>(type: "int", nullable: true),
-                    ChatUsername = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -47,20 +46,6 @@ namespace TintinsChatroom.DTO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ChatRoomModels",
-                columns: table => new
-                {
-                    ChatRoomId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ChatRoomOwner = table.Column<int>(type: "int", nullable: false),
-                    ChatRoomName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChatRoomModels", x => x.ChatRoomId);
                 });
 
             migrationBuilder.CreateTable(
@@ -170,23 +155,42 @@ namespace TintinsChatroom.DTO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ChatRoomModels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChatRoomName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatRoomModels", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChatRoomModels_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ChatMessageModels",
                 columns: table => new
                 {
-                    ChatMessageId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ChatRoomId = table.Column<int>(type: "int", nullable: false),
-                    ChatUserId = table.Column<int>(type: "int", nullable: false),
-                    ChatUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChatMessageModels", x => x.ChatMessageId);
+                    table.PrimaryKey("PK_ChatMessageModels", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ChatMessageModels_AspNetUsers_ChatUserId1",
-                        column: x => x.ChatUserId1,
+                        name: "FK_ChatMessageModels_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -194,7 +198,7 @@ namespace TintinsChatroom.DTO.Migrations
                         name: "FK_ChatMessageModels_ChatRoomModels_ChatRoomId",
                         column: x => x.ChatRoomId,
                         principalTable: "ChatRoomModels",
-                        principalColumn: "ChatRoomId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -243,9 +247,14 @@ namespace TintinsChatroom.DTO.Migrations
                 column: "ChatRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChatMessageModels_ChatUserId1",
+                name: "IX_ChatMessageModels_UserId",
                 table: "ChatMessageModels",
-                column: "ChatUserId1");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChatRoomModels_OwnerId",
+                table: "ChatRoomModels",
+                column: "OwnerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -272,10 +281,10 @@ namespace TintinsChatroom.DTO.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "ChatRoomModels");
 
             migrationBuilder.DropTable(
-                name: "ChatRoomModels");
+                name: "AspNetUsers");
         }
     }
 }

@@ -29,12 +29,8 @@ namespace TintinsChatroom.UI.Pages
         {
             if (ModelState.IsValid)
             {
-                int id = Guid.NewGuid().GetHashCode();
-
                 var user = new ChatUserModel()
                 {
-                    ChatUserId = id,
-                    ChatUsername = Model.Username,
                     UserName = Model.Username,
                     Email = Model.Email
                 };

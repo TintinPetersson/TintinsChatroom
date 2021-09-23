@@ -12,27 +12,27 @@ namespace TintinsChatroom.UI.Pages.User
 {
     public class CreateRoomModel : PageModel
     {
-        private readonly SignInManager<ChatUserModel> signInManager;
-        public ChatUserModel ChatUser { get; set; }
+        private readonly SignInManager<ChatUserModel> _signInManager;
+        private readonly AuthDbContext _context;
+
         [BindProperty]
-        public ChatRoomModel RoomModel { get; set; } = new ChatRoomModel();
-        public AuthDbContext Context { get; set; } = new AuthDbContext();
-        public CreateRoomModel(SignInManager<ChatUserModel> signInManager)
+        public ChatRoomModel ChatRoom { get; set; } = new ChatRoomModel();
+        public CreateRoomModel(SignInManager<ChatUserModel> signInManager, AuthDbContext context)
         {
-            this.signInManager = signInManager;
+            _signInManager = signInManager;
+            _context = context;
         }
         public void OnGet()
         {
         }
         public async Task<IActionResult> OnPost()
         {
-                ChatUser = await signInManager.UserManager.GetUserAsync(HttpContext.User);
+            ChatUserModel user = await _signInManager.UserManager.GetUserAsync(HttpContext.User);
+            ChatRoom.Owner = user;
+            ChatRoom.ChatMessages = new List<ChatMessageModel>();
 
-                RoomModel.ChatRoomOwner = ChatUser.ChatUserId;
-
-                Context.ChatRoomModels.Add(RoomModel);
-
-                Context.SaveChanges();
+            await _context.ChatRoomModels.AddAsync(ChatRoom);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("/User/ViewRooms");
         }
